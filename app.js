@@ -8,7 +8,7 @@ const { type } = require('os');
 const app = express();
 
 // MongoDB connection
-mongoose.connect('mongodb+srv://jaiswalanmol1151:FnMs74ha9YSNvi3V@cluster2025.sw5de.mongodb.net/?retryWrites=true&w=majority&appName=Cluster2025', {
+mongoose.connect('mongodb+srv://datasetgansvm:puir8ByBFF5wKzII@cluster0.kmkow.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
