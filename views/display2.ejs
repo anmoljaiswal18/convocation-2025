@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* style.css */
+  
+  /* Reset default margin and padding */
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+  }
+  
+  /* Header styles */
+  header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      background-color: #333;
+      color: #fff;
+  }
+  
+  .logo {
+      font-size: 2rem;
+      font-family:Verdana, Geneva, Tahoma, sans-serif;
+  }
+  
+  .search-bar {
+      display: flex;
+      align-items: center;
+  }
+  
+  .search-bar input[type="text"] {
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+  }
+  
+  .search-bar button {
+      background-color: #555;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      margin-left: 0.5rem;
+      cursor: pointer;
+  }
+  
+  /* Sidebar styles */
+  .sidebar {
+      width: 250px;
+      background-color: #222;
+      color: #fff;
+      padding: 1rem;
+  }
+  
+  .sidebar ul {
+      list-style: none;
+  }
+  
+  .sidebar li {
+      margin-bottom: 1rem;
+  }
+  
+  .sidebar a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: bold;
+  }
+  
+  /* Table styles */
+  table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      
+  }
+  
+  th, td {
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+  }
+  
+  th {
+      background-color: #444;
+      color: #fff;
+  }
+  
+  /* Add hover effect to table rows */
+  tbody tr:hover {
+      background-color: #f5f5f5;
+  }
+  
+  .container signin{
+        width: auto;
+        padding: 10px 18px;
+        background-color: #f44336;
+  }
+  
+  
+   #log-out{
+              margin-top: 10px;
+              width: 80px;
+              height: 44px;
+              display: inline-block;
+              text-align: center;
+              line-height: 44px;
+              box-shadow: none;
+              border: 1px solid transparent;
+              border-radius: 10px;
+              transition: all 0.3s; 
+              text-decoration: none;
+              font-size: small;
+  }
+  
+  #gal{
+              margin-top: 10px;
+              width: 80px;
+              height: 44px;
+              display: inline-block;
+              text-align: center;
+              line-height: 44px;
+              box-shadow: none;
+              border: 1px solid transparent;
+              border-radius: 10px;
+              transition: all 0.3s; 
+              text-decoration: none;
+              font-size: small;
+  }
+
+  .click-here-btn {
+    display: inline-block;
+    padding: 8px 25px;
+    background-color: #8b0000;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 15px 0;
+    font-size: 0.9em;
+}
+  
+      </style>
+</head>
+<body>
+      <!-- Main Content -->
+       <br>
+      <div class="main-content">
+          <br>
+          <center><h1>Registration Records</h1></center>
+          <table border="1">
+            <thead>
+              <tr>
+                <th>SR</th>
+                <th>Student Name</th>
+                <th>Course</th>
+              </tr>
+            </thead>
+            <tbody>
+                <% var index = 0; %>
+                <% students.forEach(student => { %>
+                  <tr>
+                    <td><%= ++index %></td>
+                    <td><%= student.name %></td>
+                    <td><%= student.course %></td>
+                    
+                  </tr>
+                <% }); %>
+          
+            </tbody>
+          </table>
+          <br>
+          <center>
+            <a href="/" class="click-here-btn">Back</a>
+          </center>
+  
+      </div>
+  
+      <!-- Add your JavaScript for interactivity here -->
+       
+      
+      <script>
+          //logout button js code from unishop
+          // Get the button element
+          const button = document.querySelector('#log-out');
+          button.style.backgroundColor= '#4458dc'
+          button.style.color= '#fff'
+          // Add a mouseover event listener
+          button.addEventListener('mouseover', () => {
+          // Change the button's background color on hover
+          button.style.backgroundColor = '#fff'; // Green color
+          button.style.color = '#4458dc';
+          
+        });
+    
+        // Add a mouseout event listener to revert back to the original color
+        button.addEventListener('mouseout', () => {
+        button.style.backgroundColor = '#4458dc'; // Original blue color
+        button.style.color='#fff';
+        });
+    
+        </script>
+</body>
+</html>

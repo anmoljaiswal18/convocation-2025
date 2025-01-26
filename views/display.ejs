@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Registration Records</title>
+    <style>
+        /* Reset default margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        
+        .main-content {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+
+        /* Card Style */
+        .card {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            background-color: #4458dc;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .card .card-item {
+            text-align: center;
+        }
+        
+        .card .card-item h3 {
+            margin-bottom: 5px;
+            font-size: 18px;
+        }
+        
+        .card .card-item p {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        th, td {
+            padding: 0.75rem;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        th {
+            background-color: #4458dc;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        tbody tr {
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        
+        tbody tr:hover {
+            background-color: #f0f4ff;
+            transform: scale(1.02);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1 {
+            color: #4458dc;
+            text-align: center;
+            margin-bottom: 20px;
+            animation: slideDown 0.5s ease;
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        #search {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #4458dc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .click-here-btn {
+            display: inline-block;
+            padding: 8px 25px;
+            background-color: #8b0000;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+
+        #right{
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-content">
+        <h1>Attendance Records</h1>       <span><a href="/" class="click-here-btn">Back</a></span>
+        <span id="right"><button class="click-here-btn" value="reload page" onclick="document.location.reload(true)">Reload</button></span>
+        
+        <!-- Card Layout for Student Stats -->
+        <div class="card">
+            <div class="card-item">
+                <h3>Total Students</h3>
+                <p id="totalStudents">321</p>
+            </div>
+            <div class="card-item">
+                <h3>Present Students</h3>
+                <p id="presentStudents">0</p>
+            </div>
+            <div class="card-item">
+                <h3>Absent Students</h3>
+                <p id="absentStudents">321</p>
+            </div>
+        </div>
+        
+        <input type="text" id="search" placeholder="Search students..." oninput="filterTable()">
+        
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>SR</th>
+                    <th>Student Name</th>
+                    <th>Course</th>
+                </tr>
+            </thead>
+            <tbody id="studentTableBody">
+                <% var index = 0; %>
+                <% students.forEach(student => { %>
+                    <tr class="student-row">
+                        <td><%= ++index %></td>
+                        <td><%= student.name %></td>
+                        <td><%= student.course %></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+
+    <center>
+       
+    </center>
+
+    <script>
+        let totalStudents = 321; // The total number of students is fixed at 321
+        let presentCount = 0;
+        let absentCount = totalStudents;
+
+        // Function to update attendance based on the table data
+        function updateAttendance() {
+            // Get all rows from the table (excluding the header)
+            const rows = document.querySelectorAll('#studentTableBody tr');
+            
+            // Count the number of rows in the table
+            const totalRows = rows.length;
+
+            // Calculate present students based on rows (assuming all are present by default)
+            presentCount = totalRows; // This assumes all students are present
+
+            // Calculate absent students
+            absentCount = totalStudents - presentCount;
+
+            // Update the card layout with the new values
+            document.getElementById('presentStudents').textContent = presentCount;
+            document.getElementById('absentStudents').textContent = absentCount;
+        }
+
+        // Run the updateAttendance function when the page loads
+        window.onload = function() {
+            updateAttendance(); // Update attendance on page load
+        };
+
+        // Search filter for the table
+        function filterTable() {
+            const searchInput = document.getElementById('search');
+            const filter = searchInput.value.toUpperCase();
+            const tableBody = document.getElementById('studentTableBody');
+            const rows = tableBody.getElementsByTagName('tr');
+
+            for (let i = 0; i < rows.length; i++) {
+                let nameColumn = rows[i].getElementsByTagName('td')[1];
+                let courseColumn = rows[i].getElementsByTagName('td')[2];
+                
+                if (nameColumn && courseColumn) {
+                    let nameText = nameColumn.textContent || nameColumn.innerText;
+                    let courseText = courseColumn.textContent || courseColumn.innerText;
+                    
+                    if (nameText.toUpperCase().indexOf(filter) > -1 || courseText.toUpperCase().indexOf(filter) > -1) {
+                        rows[i].style.display = "";
+                    } else {
+                        rows[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
