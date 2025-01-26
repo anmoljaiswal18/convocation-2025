@@ -8,7 +8,7 @@ const { type } = require('os');
 const app = express();
 
 // MongoDB connection
-mongoose.connect('mongodb://localhost:27017/convocation2025', {
+mongoose.connect('mongodb+srv://jaiswalanmol1151:<lRx9IeyoaYGRewcM>@cluster0.f330r.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
